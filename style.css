@@ -76,4 +76,22 @@ body {
   h1 {
     font-size: 4em;
   }
-  
+  body.resume-page h2 {
+    font-size: 2em;
+  }
+  body.resume-page section {
+    margin-bottom: 2em; /* space between major sections like Education, Skills, Experience */
+  }
+  body.resume-page a {
+    text-decoration: none;
+    color: inherit; 
+    text-align: center;
+    padding: 0.5em;
+  }
+  body.resume-page a:hover {
+    text-decoration: underline;
+    color: var(--color-accent);
+    border-bottom: 0.2em solid var(--color-accent); 
+    padding-bottom: 0.05em;
+    background-color: oklch(from var(--color-accent) 95% 5% h);   
+  }
