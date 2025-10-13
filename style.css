@@ -1,7 +1,17 @@
 html {
   --color-accent: oklch(65% 50% 0);
   accent-color: var(--color-accent); 
-  color-scheme: light;
+  color-scheme: light dark;
+}
+.color-scheme {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 0.8em;
+  font-family: inherit;
+}
+.color-scheme select {
+  font: inherit;
 }
 body {
     font: 100%/1.5 system-ui;
@@ -17,7 +27,7 @@ body {
   nav {
     display: flex;
     margin-bottom: 1em;
-    border-bottom: 1px solid oklch(80% 3% 200);
+    --border-color: oklch(50% 10% 200 / 40%);
   }
   nav a {
     flex: 1;
@@ -25,15 +35,17 @@ body {
     color: inherit;
     text-align: center;
     padding: 0.5em;
+    border-bottom: 0.1em solid var(--border-color);
+    padding-bottom: 0.1em;
   }
   nav a.current {
-    border-bottom: 0.4em solid oklch(80% 3% 200); 
+    border-bottom: 0.4em solid var(--border-color); 
     padding-bottom: 0.1em;                       
   }
   nav a:hover {
     border-bottom: 0.4em solid var(--color-accent); 
     padding-bottom: 0.1em;
-    background-color: oklch(from var(--color-accent) 95% 5% h);                    
+    background-color: color-mix(in oklch, var(--color-accent), canvas 85%);                
   }
   body.contact-page form {
     display: grid;
