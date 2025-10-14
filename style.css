@@ -97,7 +97,6 @@ body {
     margin-top: 0.5em;
     margin-bottom: 0.2em;
     font-weight: normal;
-    color: oklch(30% 2% 220);
   }
   body.resume-page section {
     margin-bottom: 2em; 
