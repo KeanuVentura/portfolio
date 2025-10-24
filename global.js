@@ -83,13 +83,17 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
         return;
     }
     containerElement.innerHTML = '';
+    if (!Array.isArray(projects)) projects = [projects];
     projects.forEach(project => {
         const article = document.createElement('article');
         article.innerHTML = `
             <${headingLevel}>${project.title || 'Untitled Project'}</${headingLevel}>
-            <img src="${project.image || ''}" alt="${project.title || 'Project image'}">
+            <img class="project-img" src="${project.image || ''}" alt="${project.title || 'Project image'}">
             <p>${project.description || ''}</p>
         `;
         containerElement.appendChild(article);
     });
 }
+export async function fetchGitHubData(username) {
+    return fetchJSON(`https://api.github.com/users/${username}`);
+  }

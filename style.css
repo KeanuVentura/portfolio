@@ -118,3 +118,31 @@ body {
   body.resume-page ul {
     margin-left: .5em;
   }
+#profile-stats dl {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+#profile-stats dt {
+    grid-row: 1;
+    font-weight: bold;
+    text-align: center;
+}
+#profile-stats dd {
+    grid-row: 2;
+    margin: 0;
+    text-align: center;
+}
+.project-img {
+  max-width: 600px;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+body.project-page .projects img.project-img {
+  max-width: 100%; /* fits inside grid cell */
+  height: auto;
+  display: block;
+  margin: 0;
+}
