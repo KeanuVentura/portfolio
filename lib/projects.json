@@ -2,25 +2,25 @@
     {
         "title": "BeyondOpenLooks",
         "year": "2025",
-        "image": "/images/beyondopenlooks.jpg",
+        "image": "images/beyondopenlooks.jpg",
         "description": "Analyzing whether elite NBA shooters excel by taking high-quality shots or by consistently outperforming shot quality expectations. Applied advanced NBA metrics in Python to quantify how elite shooters outperform expected shot quality. Developed advanced visualizations with Matplotlib and Seaborn, including radar charts and comparative plots"
     },
     {
         "title": "CookingUpInsights",
         "year": "2025",
-        "image": "/images/cookingupinsights.jpg",
+        "image": "images/cookingupinsights.jpg",
         "description": "Built a Python-based web project analyzing 800K+ Food.com recipes to uncover trends between cooking time and user ratings using data visualizations and hypothesis testing. Cleaned, merged, and filtered 800K+ recipe records; engineered and normalized features with StandardScaler and QuantileTransformer; developed and tuned a Random Forest Regressor with 5-fold cross-validation to predict calorie content and assessed model fairness across recipe complexity levels. Deployed the analysis and interactive visualizations on a Markdown-based website for public access"
     },
     {
         "title": "StatPilot",
         "year": "2025",
-        "image": "/images/statpilot.jpg",
+        "image": "images/statpilot.jpg",
         "description":  "Won the Innovation Launchpad Award for most innovative project at DataHacks 2025. Built an interactive web-based tool during a 2-day hackathon hosted by the UCSD Data Science Student Society that predicted NBA player prop outcomes (points, rebounds, assists) using historical game data scraped from ESPN. Designed a predictive model in Python with SciPy, linear regression, feature engineering, dynamic weighting, and cumulative distribution functions to calculate over/under probabilities. Created a responsive web UI with HTML and CSS; pitched the project to a panel of judges."
     },
     {
         "title": "Portfolio",
         "year": "2025",
-        "image": "/images/portfolio.jpg",
+        "image": "images/portfolio.jpg",
         "description": "A personal portfolio website built from scratch using HTML, CSS, and JavaScript to showcase projects, resume, and contact info."
     },
     {
