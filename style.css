@@ -77,7 +77,7 @@ body {
     gap: 1em;
   }
   body.project-page .projects article h2 {
-    margin: 0;
+    margin: 0 0 1rem 0;
   }
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.1;
@@ -141,8 +141,61 @@ body {
   margin: 0;
 }
 body.project-page .projects img.project-img {
-  max-width: 100%; /* fits inside grid cell */
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 0;
+}
+body.project-page .projects article {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.project-year {
+  font-family: "Baskerville", Baskerville, "Times New Roman", serif;
+  font-variant-numeric: oldstyle-nums;
+  margin: 0
+}
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
+.legend .swatch {
+  width: 1rem;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color);
+  border-radius: 50%;
+  display: inline-block;
+}
+.legend {
+  flex: 0 1 200px;
+  min-width: 100px;  
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7em, 1fr)); 
+  gap: 0.5rem 1rem;
+  list-style: none;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: nowrap;
+}
+
+.container svg {
+  flex: 1 1 150px;
+  max-width: 100%;           
+  height: auto;              
+  min-width: 50px;
 }

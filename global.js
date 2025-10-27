@@ -88,16 +88,16 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     projects.forEach(project => {
         const article = document.createElement('article');
 
-        // Fix image path depending on page location
         let imagePath = project.image || '';
         if (window.location.pathname.includes('/projects/')) {
-            imagePath = '../' + imagePath; // go up one directory from /projects/
+            imagePath = '../' + imagePath;
         }
 
         article.innerHTML = `
             <${headingLevel}>${project.title || 'Untitled Project'}</${headingLevel}>
             <img class="project-img" src="${imagePath}" alt="${project.title || 'Project image'}">
             <p>${project.description || ''}</p>
+            ${project.year ? `<p class="project-year">c. ${project.year}</p>` : ''}
         `;
         containerElement.appendChild(article);
     });
