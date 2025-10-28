@@ -170,7 +170,7 @@ body.project-page .projects article {
   display: inline-block;
 }
 .legend {
-  flex: 0 1 200px;
+  flex: 1;
   min-width: 100px;  
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(7em, 1fr)); 
@@ -198,4 +198,31 @@ body.project-page .projects article {
   max-width: 100%;           
   height: auto;              
   min-width: 50px;
+}
+.searchBar {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1.2rem; 
+  margin-bottom: 1.5rem;
+}
+.searchBar:focus {
+  outline: none;
+  border-color: blue; 
+  box-shadow: 0 0 0 2px rgba(0, 0, 255, 0.2);
+}
+.searchBar::placeholder {
+  font-size: 1.25rem;
+  color: #888;
+}
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
+}
+#projects-pie-plot path {
+  cursor: pointer;
+  transition: 300ms;
+}
+#projects-pie-plot path.selected {
+  fill: oklch(60% 45% 0) !important;
 }
