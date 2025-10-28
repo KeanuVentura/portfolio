@@ -11,26 +11,41 @@ if (projectsTitle) {
     projectsTitle.textContent = `${projects.length} Projects`;
 }
 
+renderProjects(projects, projectsContainer, 'h2');
+
 let query = '';
 let selectedIndex = -1;
 
-renderProjects(projects, projectsContainer, 'h2');
+function getFilteredProjects() {
+    let filtered = projects.filter(project =>
+        Object.values(project).join('\n').toLowerCase().includes(query)
+    );
+
+    if (selectedIndex !== -1 && data[selectedIndex]) {
+        const selectedLabel = data[selectedIndex].label;
+        filtered = filtered.filter(p => p.year === selectedLabel);
+    }
+
+    return filtered;
+}
+
+let data = [];
 
 function renderPieChart(projectsGiven) {
-    let rolledData = d3.rollups(
+    const rolledData = d3.rollups(
         projectsGiven,
         (v) => v.length,
         (d) => d.year
     );
 
-    let data = rolledData.map(([year, count]) => ({ value: count, label: year }));
-    let colors = d3.scaleOrdinal(d3.schemeTableau10);
+    data = rolledData.map(([year, count]) => ({ value: count, label: year }));
+    const colors = d3.scaleOrdinal(d3.schemeTableau10);
 
-    let sliceGenerator = d3.pie().value((d) => d.value);
-    let arcData = sliceGenerator(data);
-    let arcs = arcData.map((d) => d3.arc().innerRadius(0).outerRadius(50)(d));
+    const sliceGenerator = d3.pie().value((d) => d.value);
+    const arcData = sliceGenerator(data);
+    const arcs = arcData.map((d) => d3.arc().innerRadius(0).outerRadius(50)(d));
 
-    let svg = d3.select('svg');
+    const svg = d3.select('svg');
     svg.selectAll('path').remove();
     legend.selectAll('li').remove();
 
@@ -41,20 +56,7 @@ function renderPieChart(projectsGiven) {
             .attr('class', selectedIndex === i ? 'selected' : '')
             .on('click', () => {
                 selectedIndex = selectedIndex === i ? -1 : i;
-
-                svg.selectAll('path')
-                    .attr('class', (_, idx) => (idx === selectedIndex ? 'selected' : ''));
-
-                legend.selectAll('li')
-                    .attr('class', (_, idx) => (idx === selectedIndex ? 'selected legend-item' : 'legend-item'));
-
-                if (selectedIndex === -1) {
-                    renderProjects(projects, projectsContainer, 'h2');
-                } else {
-                    let selectedLabel = data[selectedIndex].label;
-                    let filteredProjects = projects.filter(p => p.year === selectedLabel);
-                    renderProjects(filteredProjects, projectsContainer, 'h2');
-                }
+                updateDisplay();
             });
     });
 
@@ -66,16 +68,15 @@ function renderPieChart(projectsGiven) {
     });
 }
 
+function updateDisplay() {
+    const filteredProjects = getFilteredProjects();
+    renderProjects(filteredProjects, projectsContainer, 'h2');
+    renderPieChart(filteredProjects);
+}
+
 renderPieChart(projects);
 
 searchInput.addEventListener('input', (event) => {
     query = event.target.value.toLowerCase();
-    let filteredProjects = projects.filter(project =>
-        Object.values(project).join('\n').toLowerCase().includes(query)
-    );
-
-    selectedIndex = -1;
-
-    renderProjects(filteredProjects, projectsContainer, 'h2');
-    renderPieChart(filteredProjects);
+    updateDisplay();
 });
