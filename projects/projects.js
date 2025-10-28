@@ -14,16 +14,15 @@ if (projectsTitle) {
 renderProjects(projects, projectsContainer, 'h2');
 
 let query = '';
-let selectedIndex = -1;
+let selectedYear = null;
 
 function getFilteredProjects() {
     let filtered = projects.filter(project =>
         Object.values(project).join('\n').toLowerCase().includes(query)
     );
 
-    if (selectedIndex !== -1 && data[selectedIndex]) {
-        const selectedLabel = data[selectedIndex].label;
-        filtered = filtered.filter(p => p.year === selectedLabel);
+    if (selectedYear) {
+        filtered = filtered.filter(p => p.year === selectedYear);
     }
 
     return filtered;
@@ -43,19 +42,21 @@ function renderPieChart(projectsGiven) {
 
     const sliceGenerator = d3.pie().value((d) => d.value);
     const arcData = sliceGenerator(data);
-    const arcs = arcData.map((d) => d3.arc().innerRadius(0).outerRadius(50)(d));
 
     const svg = d3.select('svg');
     svg.selectAll('path').remove();
     legend.selectAll('li').remove();
 
-    arcs.forEach((arc, i) => {
+    arcData.forEach((d, i) => {
+        const arc = d3.arc().innerRadius(0).outerRadius(50);
+
         svg.append('path')
-            .attr('d', arc)
+            .attr('d', arc(d))
             .attr('fill', colors(i))
-            .attr('class', selectedIndex === i ? 'selected' : '')
-            .on('click', () => {
-                selectedIndex = selectedIndex === i ? -1 : i;
+            .attr('class', d.data.label === selectedYear ? 'selected' : '')
+            .on('click', (event) => {
+                event.stopPropagation();
+                selectedYear = selectedYear === d.data.label ? null : d.data.label;
                 updateDisplay();
             });
     });
@@ -63,7 +64,7 @@ function renderPieChart(projectsGiven) {
     data.forEach((d, i) => {
         legend.append('li')
             .attr('style', `--color:${colors(i)}`)
-            .attr('class', selectedIndex === i ? 'selected legend-item' : 'legend-item')
+            .attr('class', d.label === selectedYear ? 'selected legend-item' : 'legend-item')
             .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
     });
 }
