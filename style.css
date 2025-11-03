@@ -118,11 +118,12 @@ body {
   body.resume-page ul {
     margin-left: .5em;
   }
-#profile-stats dl {
+  #profile-stats dl {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.5rem;
     margin-top: 1rem;
+    text-align: center;
 }
 #profile-stats dt {
     grid-row: 1;
@@ -225,4 +226,21 @@ body.project-page .projects article {
 }
 #projects-pie-plot path.selected {
   fill: oklch(60% 45% 0) !important;
+}
+#website-stats {
+  display: grid;
+  grid-template-rows: auto auto; /* 2 rows: labels + values */
+  grid-auto-flow: column;        /* fill columns left to right */
+  gap: 1.5rem;                   /* horizontal spacing */
+  justify-content: center;       /* center horizontally */
+  margin-top: 1rem;
+  text-align: center;
+}
+
+#website-stats dt {
+  font-weight: bold;
+}
+
+#website-stats dd {
+  margin: 0;
 }
