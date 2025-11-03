@@ -245,11 +245,48 @@ body.project-page .projects article {
   margin: 0;
 }
 #chart .gridlines line {
-  stroke: #ccc;        /* light gray */
-  stroke-opacity: 0.3; /* make it faint */
-  shape-rendering: crispEdges; /* keeps them sharp */
+  stroke: #ccc;
+  stroke-opacity: 0.3;
+  shape-rendering: crispEdges; 
+}
+#chart .gridlines path {
+  display: none;
+}
+dl.info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  margin: 0;
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
+}
+dl.info dt,
+dl.info dd {
+  margin: 0;
+  padding: 0.2em 0;
+}
+dl.info dt {
+  font-weight: normal;
+}
+dl.info dd {
+  margin: 0;
+  padding-left: 0.5em; /* adds some space between the label and the value */
+}
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  pointer-events: none;
+}
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
-#chart .gridlines path {
-  display: none; /* hide the axis line itself if not needed */
+circle:hover {
+  transform: scale(1.75);
 }

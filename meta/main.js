@@ -90,6 +90,8 @@ function renderScatterPlot(data, commits) {
   };
   xScale.range([usableArea.left, usableArea.right]);
   yScale.range([usableArea.bottom, usableArea.top]);
+  const [minLines, maxLines] = d3.extent(commits, (d) => d.totalLines);
+  const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([7, 35]);
   const dots = svg.append('g').attr('class', 'dots');
   dots
   .selectAll('circle')
@@ -97,8 +99,19 @@ function renderScatterPlot(data, commits) {
   .join('circle')
   .attr('cx', (d) => xScale(d.datetime))
   .attr('cy', (d) => yScale(d.hourFrac))
-  .attr('r', 5)
-  .attr('fill', 'steelblue');
+  .attr('r', (d) => rScale(d.totalLines))
+  .attr('fill', 'steelblue')
+  .style('fill-opacity', 0.7)
+  .on('mouseenter', (event, commit) => {
+    d3.select(event.currentTarget).style('fill-opacity', 1); 
+    renderTooltipContent(commit);
+    updateTooltipVisibility(true);
+    updateTooltipPosition(event);
+  })
+  .on('mouseleave', (event) => {
+    d3.select(event.currentTarget).style('fill-opacity', 0.7); // back to semi-transparent
+    updateTooltipVisibility(false);
+  });
   const gridlines = svg
   .append('g')
   .attr('class', 'gridlines')
@@ -124,3 +137,30 @@ let data = await loadData();
 let commits = processCommits(data);
 renderCommitInfo(data, commits);
 renderScatterPlot(data, commits);
+
+function renderTooltipContent(commit) {
+  if (Object.keys(commit).length === 0) return;
+
+  const link = document.getElementById('commit-link');
+  const date = document.getElementById('commit-date');
+  const time = document.getElementById('commit-time');
+  const author = document.getElementById('commit-author');
+  const lines = document.getElementById('commit-lines');
+
+  link.href = commit.url;
+  link.textContent = commit.id;
+
+  date.textContent = commit.datetime?.toLocaleDateString('en', { dateStyle: 'full' });
+  time.textContent = commit.datetime?.toLocaleTimeString('en', { hour: '2-digit', minute: '2-digit' });
+  author.textContent = commit.author;
+  lines.textContent = commit.totalLines;
+}
+function updateTooltipVisibility(isVisible) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.hidden = !isVisible;
+}
+function updateTooltipPosition(event) {
+  const tooltip = document.getElementById('commit-tooltip');
+  tooltip.style.left = `${event.clientX}px`;
+  tooltip.style.top = `${event.clientY}px`;
+}
