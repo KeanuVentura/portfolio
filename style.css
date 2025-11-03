@@ -244,3 +244,12 @@ body.project-page .projects article {
 #website-stats dd {
   margin: 0;
 }
+#chart .gridlines line {
+  stroke: #ccc;        /* light gray */
+  stroke-opacity: 0.3; /* make it faint */
+  shape-rendering: crispEdges; /* keeps them sharp */
+}
+
+#chart .gridlines path {
+  display: none; /* hide the axis line itself if not needed */
+}
