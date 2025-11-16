@@ -328,3 +328,68 @@ circle.selected {
     grid-column: 2;
   }
 }
+.loc {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;
+  background: var(--color);
+  border-radius: 50%;
+}
+#files dd {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
+}
+#files code small {
+  display: block;
+  font-size: 0.75em;
+  line-height: 1.1;
+  opacity: 0.6;
+  font-family: inherit;
+  margin-top: 0.1em;
+}
+#scrolly-1 {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+
+  > * {
+    flex: 1;
+  }
+}
+
+#scatter-story {
+  position: relative;
+}
+
+#scatter-plot {
+  position: sticky;
+  top: 2rem;          /* adds space from top of window */
+  height: 100vh;       /* larger plot height (was 50vh) */
+  padding-top: 2rem;
+}
+#scatter-plot {
+  flex: 2.25;   /* scatter plot wider than story text */
+}
+
+#scatter-story {
+  flex: 0.75;   /* story narrower */
+  padding-right: 1rem;
+}
+.step {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms ease, transform 300ms ease;
+  padding-bottom: 3rem; /* keeps spacing nice */
+}
+
+.step.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
